@@ -11,21 +11,20 @@ if ((isset($_POST['email'])) && (isset($_POST['password']))) {
     $conn = mysqli_connect('localhost', 'root', 'Ab882685', 'utilisateurs');
     $res = mysqli_query($conn, "select * from utilisateur where email =  '$email' ");
     $row = mysqli_fetch_assoc($res);
-    $nom=$row['nom'];
-    $prenom=$row['prenom'];
-    $role=$row['role'];
+    $nom = $row['nom'];
+    $prenom = $row['prenom'];
+    $role = $row['role'];
 
-    if ($row['pwd'] == $pwd) {
-        //密码验证通过，设置session，把用户名和密码保存在服务端
+    if (password_verify($pwd, $row['pwd'])) {
+        // Pass
         $_SESSION["email"] = $email;
         $_SESSION["password"] = $pwd;
         $_SESSION["nom"] = $nom;
         $_SESSION["prenom"] = $prenom;
-        $_SESSION["role"]= $role;
-
-        //最后跳转到登录后的欢迎页面 //注意：这里我们没有像cookie一样带参数过去
+        $_SESSION["role"] = $role;
         header('Location: ../Publication/administration.php');
     } else {
+        // Invalid
         echo "Error: wrong enters";
     }
 } else {

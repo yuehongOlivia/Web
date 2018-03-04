@@ -7,7 +7,7 @@ if ((!isset($_SESSION['email'])) && (!isset($_SESSION['password']))) {
 } else {
 $email = $_SESSION['email'];
 $titles = array();
-@$role=$_SESSION["role"];
+@$role = $_SESSION["role"];
 //obtenir $titles depuis le tableau de double dimension
 $i = 0;
 //connexion BdD
@@ -31,15 +31,15 @@ while ($row = mysqli_fetch_assoc($res)) {
 <?php
 //afficher les articles, et ajouter l'option modifier
 echo "<table id='table3'>";
+
 foreach ($titles as $value) {
-    if ($role == 2) {
-        echo "<tr><td>" . $value['idPubli'] . "</td>" . "<td>" . $value['titre'] . "</td>" . "<td><a href=modification.php?name=" . $value['titre'] . ">Modifier</a></td>" . "<td><a href=supprimer.php?name=" . $value['titre'] . ">Supprimer</a></td></tr>";
+    if ($role == 1) {
+        echo "<tr><td>" . $value['titre'] . "</td>" . "<td>" . $value['datePubli'] . "</td> " . "<td><a href=../Publication/modification.php?name=" . $value['idPubli'] . ">Modifier</a></td>" . "<td><a href=../Publication/suppression.php?name=" . $value['idPubli'] . ">Supprimer</a></td></tr>";
     } else {
-        echo "<tr><td>" . $value['idPubli'] . "</td>" . "<td>" . $value['titre'] . "</td>" . "<td><a href=modification.php?name=" . $value['titre'] . ">Modifier</a></td>";
+        echo "<tr><td>" . $value['titre'] . "</td>" . "<td>" . $value['datePubli'] . "</td> " . "<td><a href=../Publication/modification.php?name=" . $value['idPubli'] . ">Modifier</a></td>";
     }
 }
 echo "</table>";
-
 require_once "../accessoires/footer.html";
 }
 ?>

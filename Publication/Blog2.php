@@ -34,6 +34,7 @@ require_once "../accessoires/nav.html";
     </div>
 
     <?php
+
     require_once "../accessoires/footer.html";
     ?>
 </section>

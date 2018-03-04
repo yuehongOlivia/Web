@@ -18,8 +18,8 @@ if (!isset($_SESSION["nom"])) {
         <dt><?php echo "Welcome, rédacteur " . $nom . " " . $prenom . ", veuillez choisir une option"; ?></dt><?php } else { ?>
         <dt><?php echo "Welcome, administrateur " . $nom . " " . $prenom . ", veuillez choisir une option"; ?></dt><?php } ?>
         </dl>
-        <li><a href="publication.php">Faire une publication</a></li>
-        <li><a href="modificationA.php">Gérer vos publications</a></li>
+        <li><a href="../Publication/publication.php">Faire une publication</a></li>
+        <li><a href="../Publication/modificationA.php">Gérer vos publications</a></li>
         <br>
         <br>
         </ul>

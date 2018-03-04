@@ -40,6 +40,10 @@ require_once "../accessoires/nav.html";
 
 <?php
 
+$options = [
+    'salt' => uniqid(mt_rand(), true), //write your own code to generate a suitable salt
+    'cost' => 12 // the default cost is 10
+];
 if ((isset($_POST["login"])) && (!empty($_POST["login"]))) {
     echo "Veuillez remplir le formulaire pour s'inscrire";
 }
@@ -55,11 +59,12 @@ if (isset($_POST["email"]) && (!empty($_POST["email"]))) {
         echo "<p id='notice'>Connecté au serveur $servername,à la base $bdd</p>";
         $email = htmlspecialchars($_POST["email"]);
         $pwd = htmlspecialchars($_POST["password"]);
+        $hash = password_hash($pwd, PASSWORD_DEFAULT, $options);
         $nom = htmlspecialchars($_POST["nom"]);
         $prenom = htmlspecialchars($_POST["prenom"]);
         $genre = htmlspecialchars($_POST["sex"]);
         $role = 1;
-        $sql1 = "insert into utilisateur(email,pwd,nom,prenom,genre,role) VALUES ('$email','$pwd','$nom','$prenom','$genre',$role)";
+        $sql1 = "insert into utilisateur(email,pwd,nom,prenom,genre,role) VALUES ('$email','$hash','$nom','$prenom','$genre',$role)";
         $result = $conn->query($sql1);
         if (!$result) {
             echo "Error: " . $sql1 . "<br>" . $conn->error;

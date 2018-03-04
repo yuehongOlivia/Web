@@ -55,9 +55,10 @@ if ((!isset($_SESSION['email'])) && (!isset($_SESSION['password']))) {
             if (!$result) {
                 echo "Error: " . $sql1 . "<br>" . $conn->error;
             } else {
-                header('Location: ../Publication/modification.php');
+                $conn->close();
+                header('Location: ../Publication/modificationA.php');
             }
-            $conn->close();
+
         }
     }
 }
